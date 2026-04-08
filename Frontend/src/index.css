@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --admin-primary: #3b82f6;
+    --admin-secondary: #6366f1;
+    --admin-accent: #8b5cf6;
+    --admin-bg: #f8fafc;
+    --admin-sidebar: rgba(255, 255, 255, 0.7);
+    --admin-card: rgba(255, 255, 255, 0.9);
+  }
+
+  body {
+    @apply bg-[var(--admin-bg)] text-slate-900 antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Custom Scrollbar for a premium feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Premium Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+/* Mesh Gradients */
+.mesh-gradient-blue {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(217,100%,95%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,100%,95%,1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(240,100%,95%,1) 0, transparent 50%);
+}
+
+.mesh-gradient-dark {
+  background-color: #0f172a;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(217,100%,15%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,100%,15%,1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(240,100%,15%,1) 0, transparent 50%);
+}
