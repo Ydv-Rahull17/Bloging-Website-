@@ -99,7 +99,7 @@ const MyBlog = () => {
               <div className="aspect-video relative overflow-hidden bg-slate-100">
                 {blog.image ? (
                   <img
-                    src={`http://localhost:5000/uploads/${blog.image}`}
+                    src={blog.image_url || `http://localhost:5000/uploads/${blog.image}`}
                     alt={blog.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => {
