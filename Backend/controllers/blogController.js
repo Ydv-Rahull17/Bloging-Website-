@@ -44,10 +44,19 @@ exports.getBlogsByUser = async (req, res) => {
 exports.getBlogById = async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await db.query('SELECT * FROM blogs WHERE id = $1', [id]);
+        // const result = await db.query('SELECT * FROM blogs WHERE id = $1', [id]);
+        const result = await db.query(`
+            SELECT blogs.*, users.username AS author_name , 
+            users.profile_image AS profile_image
+            FROM blogs
+            JOIN users ON blogs.user_id = users.id
+            WHERE blogs.id = $1
+        `, [id]);
+        console.log('Fetched blog:', result.rows[0]);
         if (result.rows.length > 0) {
             const blog = result.rows[0];
             blog.image_url = `http://localhost:5000/uploads/${blog.image}`;
+            blog.profile_image_url = blog.profile_image ? `http://localhost:5000/uploads/${blog.profile_image}` : null;
             res.json(blog);
         } else {
             res.status(404).json({ message: 'Blog not found' });
@@ -136,6 +145,7 @@ exports.getPopularBlog = async (req, res) => {
             ORDER BY blogs.created_at DESC
             LIMIT 5
         `);
+        console.log('Fetched popular blogs:', result.rows);
         const blogs = result.rows.map(blog => ({
             ...blog,
             image_url: blog.image ? `http://localhost:5000/uploads/${blog.image}` : null
